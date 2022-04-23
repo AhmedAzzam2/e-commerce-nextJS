@@ -1,0 +1,12 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+var express_1 = require("express");
+var orders_1 = require("../../controlers/orders");
+var token_1 = require("../../middelware/token");
+var orderRoutes = (0, express_1.Router)();
+orderRoutes.get('/orders', token_1.authorization, orders_1.index);
+orderRoutes.get('/orders/:id', token_1.authorization, orders_1.show);
+orderRoutes.post('/orders', token_1.authorization, orders_1.create);
+orderRoutes.post('/orders/:id/products', token_1.authorization, orders_1.addProduct);
+orderRoutes.get('/orders/users/:id', token_1.authorization, orders_1.getOrder);
+exports.default = orderRoutes;

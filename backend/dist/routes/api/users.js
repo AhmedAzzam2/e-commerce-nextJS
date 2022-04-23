@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+var express_1 = require("express");
+var users_con_1 = require("../../controlers/users.con");
+var token_1 = require("../../middelware/token");
+var userRoutes = (0, express_1.Router)();
+userRoutes.post('/users', users_con_1.create);
+userRoutes.get('/users', token_1.authorization, users_con_1.index);
+userRoutes.get('/users/:id', token_1.authorization, users_con_1.show);
+userRoutes.post('/update', token_1.authorization, users_con_1.update);
+userRoutes.delete('/users/:id', token_1.authorization, users_con_1.destroy);
+userRoutes.post('/signin', users_con_1.authenticate);
+exports.default = userRoutes;
